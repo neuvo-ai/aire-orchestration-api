@@ -1,0 +1,20 @@
+[Unit]
+Description=orchestration-api
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Environment=NODE_ENV=production
+Environment=IGNORE_SIGS=true
+WorkingDirectory=/var/www/dashboard-api
+ExecStart=/usr/bin/node /var/www/orchestration-api/app/index.js
+ExecReload=/usr/bin/node /var/www/orchestration-api/app/index.js
+Restart=always
+RestartSec=2s
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=orchestration-api
+
+[Install]
+WantedBy=multi-user.target
